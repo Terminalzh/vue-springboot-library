@@ -5,9 +5,10 @@ target/
 
 HELP.md
 ./target/
+vue/node_modules
 !.mvn/wrapper/maven-wrapper.jar
-!**/src/main/**/target/
-!**/src/test/**/target/
+**/src/main/**/target/
+**/src/test/**/target/
 /backend/.ideal/
 ### STS ###
 .apt_generated
