@@ -22,14 +22,6 @@ public class LendRecordController {
     @Resource
     LendRecordMapper LendRecordMapper;
 
-    @DeleteMapping("/{isbn}")
-    public Result<?> delete(@PathVariable String isbn) {
-        Map<String, Object> map = new HashMap<>();
-        map.put("isbn", isbn);
-        LendRecordMapper.deleteByMap(map);
-        return Result.success();
-    }
-
     //删除一条记录
     @PostMapping("/deleteRecord")
     public Result<?> deleteRecord(@RequestBody LendRecord LendRecord) {
@@ -59,6 +51,37 @@ public class LendRecordController {
         return Result.success();
     }
 
+    @DeleteMapping("/{isbn}")
+    public Result<?> delete(@PathVariable String isbn) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("isbn", isbn);
+        LendRecordMapper.deleteByMap(map);
+        return Result.success();
+    }
+
+    @PutMapping
+    public Result<?> update(@RequestBody LendRecord lendRecord) {
+        UpdateWrapper<LendRecord> updateWrapper = new UpdateWrapper<>();
+        updateWrapper.eq("isbn", lendRecord.getIsbn()).eq("reader_id", lendRecord.getReaderId());
+        LendRecord lendrecord = new LendRecord();
+        lendrecord.setLendTime(lendRecord.getLendTime());
+        lendrecord.setReturnTime(lendRecord.getReturnTime());
+        lendrecord.setStatus(lendRecord.getStatus());
+        LendRecordMapper.update(lendrecord, updateWrapper);
+        return Result.success();
+    }
+
+    @PutMapping("/{lendTime}")
+    public Result<?> update2(@PathVariable Date lendTime, @RequestBody LendRecord lendRecord) {
+        UpdateWrapper<LendRecord> updateWrapper = new UpdateWrapper<>();
+        updateWrapper.eq("lendTime", lendTime);
+        LendRecord lendrecord = new LendRecord();
+        lendrecord.setReturnTime(lendRecord.getReturnTime());
+        lendrecord.setStatus(lendRecord.getStatus());
+        LendRecordMapper.update(lendrecord, updateWrapper);
+        return Result.success();
+    }
+
     @GetMapping
     public Result<?> findPage(@RequestParam(defaultValue = "1") Integer pageNum,
                               @RequestParam(defaultValue = "10") Integer pageSize,
@@ -77,29 +100,6 @@ public class LendRecordController {
         }
         Page<LendRecord> LendRecordPage = LendRecordMapper.selectPage(new Page<>(pageNum, pageSize), wrappers);
         return Result.success(LendRecordPage);
-    }
-
-    @PutMapping("/{isbn}")
-    public Result<?> update(@PathVariable String isbn, @RequestBody LendRecord lendRecord) {
-        UpdateWrapper<LendRecord> updateWrapper = new UpdateWrapper<>();
-        updateWrapper.eq("isbn", isbn);
-        LendRecord lendrecord = new LendRecord();
-        lendrecord.setLendTime(lendRecord.getLendTime());
-        lendrecord.setReturnTime(lendRecord.getReturnTime());
-        lendrecord.setStatus(lendRecord.getStatus());
-        LendRecordMapper.update(lendrecord, updateWrapper);
-        return Result.success();
-    }
-
-    @PutMapping("/time/{lendTime}")
-    public Result<?> update2(@PathVariable Date lendTime, @RequestBody LendRecord lendRecord) {
-        UpdateWrapper<LendRecord> updateWrapper = new UpdateWrapper<>();
-        updateWrapper.eq("lendTime", lendTime);
-        LendRecord lendrecord = new LendRecord();
-        lendrecord.setReturnTime(lendRecord.getReturnTime());
-        lendrecord.setStatus(lendRecord.getStatus());
-        LendRecordMapper.update(lendrecord, updateWrapper);
-        return Result.success();
     }
 
 }
