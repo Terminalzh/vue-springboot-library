@@ -91,7 +91,7 @@ public class LendRecordController {
         return Result.success();
     }
 
-    @PutMapping("/{lendTime}")
+    @PutMapping("/time/{lendTime}")
     public Result<?> update2(@PathVariable Date lendTime, @RequestBody LendRecord lendRecord) {
         UpdateWrapper<LendRecord> updateWrapper = new UpdateWrapper<>();
         updateWrapper.eq("lendTime", lendTime);

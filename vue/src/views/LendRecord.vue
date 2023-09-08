@@ -170,7 +170,7 @@ export default defineComponent({
       //地址,但是？IP与端口？+请求参数
       // this.form?这是自动保存在form中的，虽然显示时没有使用，但是这个对象中是有它的
       if(this.form.isbn){
-        request.post("/LendRecord" + isbn, this.form).then(res => {
+        request.put("/LendRecord/" + isbn, this.form).then(res => {
           console.log(res)
           if (res.code == 0) {
             ElMessage({
