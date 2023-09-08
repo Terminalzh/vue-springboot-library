@@ -9,6 +9,7 @@ HELP.md
 !**/src/main/**/target/
 !**/src/test/**/target/
 /backend/.ideal/
+
 ### STS ###
 .apt_generated
 .classpath
