@@ -1,7 +1,7 @@
 package com.example.library.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.example.library.LoginUser;
+import com.example.library.commom.LoginUser;
 import com.example.library.commom.Result;
 import com.example.library.entity.Book;
 import com.example.library.entity.LendRecord;

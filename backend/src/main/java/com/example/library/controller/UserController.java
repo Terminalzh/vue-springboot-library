@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.example.library.LoginUser;
+import com.example.library.commom.LoginUser;
 import com.example.library.commom.Result;
 import com.example.library.entity.User;
 import com.example.library.mapper.UserMapper;
