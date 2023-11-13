@@ -318,7 +318,7 @@ export default {
         this.form3.status = "1"
         console.log(bn)
         this.form3.borrownum = bn
-        request.put("/LendRecord1/",this.form3).then(res =>{
+        request.put("/LendRecord1/borrownum",this.form3).then(res =>{
           console.log(res)
           let form3 ={};
           form3.isbn = isbn;
@@ -343,7 +343,7 @@ export default {
       // this.form3.status = "1"
       // console.log(bn)
       // this.form3.borrownum = bn
-      // request.put("/LendRecord1/",this.form3).then(res =>{
+      // request.put("/LendRecord1/borrownum",this.form3).then(res =>{
       //   console.log(res)
       // })
       // let form3 ={};

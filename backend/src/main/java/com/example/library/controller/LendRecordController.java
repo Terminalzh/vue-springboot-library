@@ -34,9 +34,7 @@ public class LendRecordController {
 
     @PostMapping("/deleteRecords")
     public Result<?> deleteRecords(@RequestBody List<LendRecord> LendRecords) {
-        int len = LendRecords.size();
-        for (int i = 0; i < len; i++) {
-            LendRecord curRecord = LendRecords.get(i);
+        for (LendRecord curRecord : LendRecords) {
             Map<String, Object> map = new HashMap<>();
             map.put("isbn", curRecord.getIsbn());
             map.put("borrownum", curRecord.getBorrownum());
@@ -75,6 +73,17 @@ public class LendRecordController {
     public Result<?> update2(@PathVariable Date lendTime, @RequestBody LendRecord lendRecord) {
         UpdateWrapper<LendRecord> updateWrapper = new UpdateWrapper<>();
         updateWrapper.eq("lendTime", lendTime);
+        LendRecord lendrecord = new LendRecord();
+        lendrecord.setReturnTime(lendRecord.getReturnTime());
+        lendrecord.setStatus(lendRecord.getStatus());
+        LendRecordMapper.update(lendrecord, updateWrapper);
+        return Result.success();
+    }
+
+    @PutMapping("/borrownum")
+    public Result<?> update2(@RequestBody LendRecord lendRecord) {
+        UpdateWrapper<LendRecord> updateWrapper = new UpdateWrapper<>();
+        updateWrapper.eq("isbn", lendRecord.getIsbn()).eq("reader_id", lendRecord.getReaderId()).eq("borrownum", lendRecord.getBorrownum());
         LendRecord lendrecord = new LendRecord();
         lendrecord.setReturnTime(lendRecord.getReturnTime());
         lendrecord.setStatus(lendRecord.getStatus());
